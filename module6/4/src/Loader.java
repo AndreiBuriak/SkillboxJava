@@ -2,9 +2,10 @@ public class Loader {
     public static void main(String[] args) {
         Company company = new Company();
 
-        company.hireAll("Operator", 180);
-        company.hireAll("Manager", 80);
-        company.hireAll("TopManager", 10);
+
+        company.hireAll("Operator", 180, company);
+        company.hireAll("Manager", 80, company);
+        company.hireAll("TopManager", 10, company);
 
         System.out.println("--------Список самых высоких зарплат до увольнений--------");
         company.getTopSalaryStaff(15);

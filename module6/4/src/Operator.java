@@ -1,8 +1,8 @@
 public class Operator implements Employee {
     private int salaryOperator;
 
-    Operator() {
-        salaryOperator = (int) (50000 + 10000 * Math.random());
+    Operator(Company company) {
+        this.salaryOperator = (int) (50000 + 10000 * Math.random());
     }
 
     @Override

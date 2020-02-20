@@ -1,13 +1,16 @@
 import java.util.*;
 
 public class Company {
-    private static int income;
 
+    private int income;
     private int employeesCount = 0;
-
     private ArrayList<Employee> employees = new ArrayList();
 
-    static int getIncome() {
+    Company() {
+        income = 0;
+    }
+
+    int getIncome() {
         return income;
     }
 
@@ -21,28 +24,23 @@ public class Company {
         employeesCount += 1;
     }
 
-    void hireAll(String employeeType, int count) {
-        switch (employeeType) {
-            case "Manager":
-                for (int i = 0; i < count; i++) {
-                    Manager object = new Manager();
-                    employees.add(object);
-                    income += object.getEarnedMoneyManager();
-                    employeesCount += 1;
-                }
-                break;
-            case "TopManager":
-                for (int i = 0; i < count; i++) {
-                    employees.add(new TopManager());
-                    employeesCount += 1;
-                }
-                break;
-            case "Operator":
-                for (int i = 0; i < count; i++) {
-                    employees.add(new Operator());
-                    employeesCount += 1;
-                }
-                break;
+    void hireAll(String employeeType, int count, Company company) {
+        for (int i = 0; i < count; i++) {
+            Employee object = null;
+            switch (employeeType) {
+                case "Manager":
+                    object = new Manager(company);
+                    break;
+                case "Operator":
+                    object = new Operator(company);
+                    break;
+                case "TopManager":
+                    object = new TopManager(company);
+                    break;
+            }
+            employees.add(object);
+            income += object.getEarnedMoneyManager();
+            employeesCount += 1;
         }
     }
 
