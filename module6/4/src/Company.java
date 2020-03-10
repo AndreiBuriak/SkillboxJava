@@ -49,36 +49,17 @@ public class Company {
         employeesCount--;
     }
 
-    void getTopSalaryStaff(int count) {
-
+    void getSalaryStaff(int count, Comparator comparator) {
         if (count <= employeesCount & count > 0) {
+            ArrayList<Employee> SalaryList = new ArrayList<>(employees);
 
-            ArrayList<Employee> topSalaryList = new ArrayList<>(employees);
-
-            topSalaryList.sort(new TopSalaryComparator());
-
+            SalaryList.sort(comparator);
 
             for (int i = 0; i < count; i++) {
-                System.out.println(i + 1 + ". " + topSalaryList.get(i).getMonthSalary() + " руб.");
+                System.out.println(i + 1 + ". " + SalaryList.get(i).getMonthSalary() + " руб.");
             }
         } else
             System.out.println("Список не может быть отображен, так как введено некорректоное количество сотрудников");
-
-    }
-
-    void getLowestSalaryStaff(int count) {
-
-        if (count <= employeesCount & count > 0) {
-            ArrayList<Employee> lowestSalaryList = new ArrayList<>(employees);
-
-            lowestSalaryList.sort(new LowestSalaryComparator());
-
-            for (int i = 0; i < count; i++) {
-                System.out.println(i + 1 + ". " + lowestSalaryList.get(i).getMonthSalary() + " руб.");
-            }
-        } else
-            System.out.println("Список не может быть отображен, так как введено некорректоное количество сотрудников");
-
     }
 
 }

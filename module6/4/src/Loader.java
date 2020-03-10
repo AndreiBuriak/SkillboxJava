@@ -8,19 +8,18 @@ public class Loader {
         company.hireAll("TopManager", 10, company);
 
         System.out.println("--------Список самых высоких зарплат до увольнений--------");
-        company.getTopSalaryStaff(15);
+        company.getSalaryStaff(15, new TopSalaryComparator());
         System.out.println("--------Список самых низких зарплат до увольнений--------");
-        company.getLowestSalaryStaff(30);
+        company.getSalaryStaff(30, new LowestSalaryComparator());
 
         for (int i = 0; i < company.getEmployeesCount(); i++) {
             company.fire(i);
         }
 
         System.out.println("--------Список самых высоких зарплат после увольнений--------");
-        company.getTopSalaryStaff(15);
+        company.getSalaryStaff(15, new TopSalaryComparator());
         System.out.println("--------Список самых низких зарплат после увольнений--------");
-        company.getLowestSalaryStaff(30);
-
+        company.getSalaryStaff(30, new LowestSalaryComparator());
 
     }
 }
