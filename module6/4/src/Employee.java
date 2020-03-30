@@ -1,7 +1,9 @@
 public interface Employee {
     int getMonthSalary();
 
-    int getEarnedMoneyManager();
+    default int getEarnedMoneyManager() {
+        return 0;
+    }
 }
 
 

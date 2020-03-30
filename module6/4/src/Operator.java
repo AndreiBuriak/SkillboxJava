@@ -10,8 +10,4 @@ public class Operator implements Employee {
         return salaryOperator;
     }
 
-    @Override
-    public int getEarnedMoneyManager() {
-        return 0;
-    }
 }

@@ -24,20 +24,9 @@ public class Company {
         employeesCount += 1;
     }
 
-    void hireAll(String employeeType, int count, Company company) {
-        for (int i = 0; i < count; i++) {
-            Employee object = null;
-            switch (employeeType) {
-                case "Manager":
-                    object = new Manager(company);
-                    break;
-                case "Operator":
-                    object = new Operator(company);
-                    break;
-                case "TopManager":
-                    object = new TopManager(company);
-                    break;
-            }
+    void hireAll(List<Employee> staff) {
+        for (int i = 0; i < staff.size(); i++) {
+            Employee object = staff.get(i);
             employees.add(object);
             income += object.getEarnedMoneyManager();
             employeesCount += 1;
@@ -46,6 +35,7 @@ public class Company {
 
     void fire(int number) {
         employees.remove(number);
+        income -= employees.get(number).getEarnedMoneyManager();
         employeesCount--;
     }
 
@@ -62,4 +52,13 @@ public class Company {
             System.out.println("Список не может быть отображен, так как введено некорректоное количество сотрудников");
     }
 
+    void getTopSalaryStaff(int count) {
+
+        getSalaryStaff(count, (Comparator<Employee>) (o1, o2) -> Integer.compare(o2.getMonthSalary(), o1.getMonthSalary()));
+    }
+
+    void getLowestSalaryStaff(int count) {
+
+        getSalaryStaff(count, (Comparator<Employee>) (o1, o2) -> Integer.compare(o1.getMonthSalary(), o2.getMonthSalary()));
+    }
 }

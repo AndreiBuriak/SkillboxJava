@@ -14,8 +14,4 @@ public class TopManager implements Employee {
         return salaryTopManager;
     }
 
-    @Override
-    public int getEarnedMoneyManager() {
-        return 0;
-    }
 }
