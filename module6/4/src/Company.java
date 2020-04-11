@@ -3,10 +3,12 @@ import java.util.*;
 public class Company {
 
     private int income;
-    private int employeesCount = 0;
     private ArrayList<Employee> employees = new ArrayList();
+    private final int companyIncomePlane = 10000000;
+
 
     Company() {
+
         income = 0;
     }
 
@@ -14,33 +16,35 @@ public class Company {
         return income;
     }
 
-    int getEmployeesCount() {
-        return employeesCount;
+    public int getCompanyIncomePlane() {
+        return companyIncomePlane;
+    }
+
+    public int getEmployeesQuantity() {
+        return employees.size();
     }
 
     public void hire(Employee object) {
-        income += object.getEarnedMoneyManager();
+        income += object.getEarnedMoney();
         employees.add(object);
-        employeesCount += 1;
     }
 
     void hireAll(List<Employee> staff) {
         for (int i = 0; i < staff.size(); i++) {
             Employee object = staff.get(i);
-            employees.add(object);
-            income += object.getEarnedMoneyManager();
-            employeesCount += 1;
+            hire(object);
         }
     }
 
     void fire(int number) {
-        employees.remove(number);
-        income -= employees.get(number).getEarnedMoneyManager();
-        employeesCount--;
+        if (number < getEmployeesQuantity() & number >= 0) {
+            income -= employees.get(number).getEarnedMoney();
+            employees.remove(number);
+        }
     }
 
     void getSalaryStaff(int count, Comparator comparator) {
-        if (count <= employeesCount & count > 0) {
+        if (count <= getEmployeesQuantity() & count > 0) {
             ArrayList<Employee> SalaryList = new ArrayList<>(employees);
 
             SalaryList.sort(comparator);
@@ -54,11 +58,11 @@ public class Company {
 
     void getTopSalaryStaff(int count) {
 
-        getSalaryStaff(count, (Comparator<Employee>) (o1, o2) -> Integer.compare(o2.getMonthSalary(), o1.getMonthSalary()));
+        getSalaryStaff(count, (Comparator<Employee>) (o1, o2) -> o2.compareTo(o1));
     }
 
     void getLowestSalaryStaff(int count) {
 
-        getSalaryStaff(count, (Comparator<Employee>) (o1, o2) -> Integer.compare(o1.getMonthSalary(), o2.getMonthSalary()));
+        getSalaryStaff(count, (Comparator<Employee>) (o1, o2) -> o2.compareToDesc(o1));
     }
 }

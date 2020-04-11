@@ -4,18 +4,18 @@ import java.util.List;
 public class Loader {
     public static void main(String[] args) {
         Company company = new Company();
-
-        company.hireAll(staffList("Operator", 180, company));
         company.hireAll(staffList("Manager", 80, company));
+        company.hireAll(staffList("Operator", 180, company));
         company.hireAll(staffList("TopManager", 10, company));
+
 
         System.out.println("--------Список самых высоких зарплат до увольнений--------");
         company.getTopSalaryStaff(15);
         System.out.println("--------Список самых низких зарплат до увольнений--------");
         company.getLowestSalaryStaff(30);
-        System.out.println(company.getEmployeesCount());
 
-        for (int i = 0; i < company.getEmployeesCount(); i++) {
+        int e = company.getEmployeesQuantity();
+        for (int i = 0; i <= e / 2 - 1; i++) {
             company.fire(i);
         }
 
@@ -25,17 +25,18 @@ public class Loader {
         company.getLowestSalaryStaff(30);
 
     }
-     private static List<Employee> staffList(String employeeType, int staffQuantity, Company company) {
-         List<Employee> staff = Arrays.asList(new Employee[staffQuantity]);
+
+    private static List<Employee> staffList(String employeeType, int staffQuantity, Company company) {
+        List<Employee> staff = Arrays.asList(new Employee[staffQuantity]);
         switch (employeeType) {
             case "Manager":
                 for (int i = 0; i < staff.size(); i++) {
-                    staff.set(i, new Manager(company));
+                    staff.set(i, new Manager());
                 }
                 break;
             case "Operator":
                 for (int i = 0; i < staff.size(); i++) {
-                    staff.set(i, new Operator(company));
+                    staff.set(i, new Operator());
                 }
                 break;
             case "TopManager":
@@ -46,4 +47,5 @@ public class Loader {
         }
         return staff;
     }
+
 }

@@ -1,7 +1,7 @@
 public class Operator implements Employee {
     private int salaryOperator;
 
-    Operator(Company company) {
+    Operator() {
         this.salaryOperator = (int) (50000 + 10000 * Math.random());
     }
 
