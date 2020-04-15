@@ -5,22 +5,22 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Stream;
 
-public class Main {
+public class Main  {
     private static String staffFile = "data/staff.txt";
     private static String dateFormat = "dd.MM.yyyy";
 
-    public static void main(String[] args) {
-        ArrayList<Employee> staff = loadStaffFromFile();
+    public static void main(String[] args) throws ParseException {
+        String beginningOfPeriod = "31.12.2016";
+        String endOfPeriod = "01.01.2018";
+        Date date1 = new SimpleDateFormat(dateFormat).parse(beginningOfPeriod);
+        Date date2 = new SimpleDateFormat(dateFormat).parse(endOfPeriod);
 
-        Collections.sort(staff, (o1, o2) -> {
-            o1.getSalary().compareTo(o2.getSalary());
-            if (o1.getSalary().compareTo(o2.getSalary()) == 0) {
-                return o1.getName().compareTo(o2.getName());
-            } else return o1.getSalary().compareTo(o2.getSalary());
-        });
-        for (Employee employee : staff) {
-            System.out.println(employee);
-        }
+        ArrayList<Employee> staff = loadStaffFromFile();
+        staff.stream()
+                .filter(e -> (e.getWorkStart().after(date1) & e.getWorkStart().before(date2)))
+                .max(Comparator.comparing(Employee::getSalary))
+                .ifPresent(e -> System.out.println(e.getSalary()));
+
 
     }
 
