@@ -1,10 +1,10 @@
 import java.util.*;
 
-public class Company {
+class Company {
 
     private int income;
+    int companyIncomePlane = 10000000;
     private ArrayList<Employee> employees = new ArrayList();
-    private final int companyIncomePlane = 10000000;
 
 
     Company() {
@@ -16,22 +16,21 @@ public class Company {
         return income;
     }
 
-    public int getCompanyIncomePlane() {
+    int getCompanyIncomePlane() {
         return companyIncomePlane;
     }
 
-    public int getEmployeesQuantity() {
+    int getEmployeesQuantity() {
         return employees.size();
     }
 
-    public void hire(Employee object) {
+    private void hire(Employee object) {
         income += object.getEarnedMoney();
         employees.add(object);
     }
 
     void hireAll(List<Employee> staff) {
-        for (int i = 0; i < staff.size(); i++) {
-            Employee object = staff.get(i);
+        for (Employee object : staff) {
             hire(object);
         }
     }
@@ -43,7 +42,7 @@ public class Company {
         }
     }
 
-    void getSalaryStaff(int count, Comparator comparator) {
+    private void getSalaryStaff(int count, Comparator comparator) {
         if (count <= getEmployeesQuantity() & count > 0) {
             ArrayList<Employee> SalaryList = new ArrayList<>(employees);
 
